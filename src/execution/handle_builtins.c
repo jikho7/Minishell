@@ -13,7 +13,7 @@ void		builtins_0(t_pipe *d_pip, t_exec *d_exe, t_shell *d_shell, char *cmd)
 	{
 		close_pipes(d_pip, 1);
 		d_exe->cmd_n_arg = ft_split_exec(cmd, ' ', 0);
-		fprintf(stderr, "handle_redi_builtin_0\n");
+		//fprintf(stderr, "handle_redi_builtin_0\n");
 		handle_redirections(d_exe, d_pip);
 		if (d_exe->cmd_number == 0)
 		{
@@ -47,7 +47,7 @@ void	builtins_1(t_pipe *d, t_exec *d_exe, t_shell *d_shell, char *cmd)
 	{
 		close_pipes(d, 2);
 		d_exe->cmd_n_arg = ft_split_exec(cmd, ' ', 0);
-		fprintf(stderr, "handle_redi_builtin_1\n");
+		//fprintf(stderr, "handle_redi_builtin_1\n");
 		handle_redirections(d_exe, d);
 		// if (dup2 (d->fd_pipe2[0], STDIN_FILENO) == -1)
 		// 	fprintf(stderr, "dup error_buil_1\n"); //handle_dup_err(0, d->fd_pipe2[0], d_exe->cmd_n_arg, 1);

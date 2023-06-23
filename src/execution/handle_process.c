@@ -26,10 +26,20 @@ void	close_pipes(t_pipe *d, int process)
 }
 
 void handle_redirections(t_exec *exe, t_pipe *pipe)
-{
-	fprintf(stderr, ">>>HANDLE FILES\n");
-	if (exe->redi_infile[0])
-		exe->redi_infile = handle_infile(exe);
+{	
+	//fprintf(stderr, ">>>HANDLE FILES\n");
+	if ((ft_strncmp((const char*)exe->str_heredoc, "", 1) != 0))	// AJOUT HEREDOC
+	{
+		//fprintf(stderr, "heredoc no empty\n");
+		pipe->fd_in = open(".heredoc.txt", O_RDONLY);	//ADDED HANDLE HEREDOC	
+		exe->redi_infile[0] = ".heredoc.txt";
+	}
+	else
+	{
+		//fprintf(stderr, "heredoc empty\n");
+		if (exe->redi_infile[0])
+			exe->redi_infile = handle_infile(exe);
+	}
 	if (exe->redi_outfile[0])
 		exe->redi_outfile = handle_outfile(exe);
 	init_struc_pipe(pipe, exe->redi_infile[0], exe->redi_outfile[0], exe);
@@ -56,7 +66,7 @@ char	**handle_infile(t_exec *exe)
 		i--;
 	}
 	exe->redi_infile[0] = infile_tab[i];
-	fprintf(stderr, "control redi infile: %s\n", exe->redi_infile[0]);
+	//fprintf(stderr, "control redi infile: %s\n", exe->redi_infile[0]);
 	return(&exe->redi_infile[0]);
 }
 
@@ -79,6 +89,6 @@ char	**handle_outfile(t_exec *exe)
 		i--;
 	}
 	exe->redi_outfile[0] = outfile_tab[i];
-	fprintf(stderr, "control redi outfile: %s\n", exe->redi_outfile[0]);
+	//fprintf(stderr, "control redi outfile: %s\n", exe->redi_outfile[0]);
 	return(&exe->redi_outfile[0]);
 }

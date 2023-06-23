@@ -9,16 +9,16 @@ int	main(int ac, char **av, char **envp)
 	//int i = 0;
 
  	t_exec	*info_exec = NULL;
-	info_exec = &(t_exec){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	info_exec = &(t_exec){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 	/*------------------VARIABLES_TEST--------------------*/
-	char *test_tab_cmd[] = {"cat -e", NULL};
-	char *redirections_infile[] = {"text_c.txt text_a.txt", NULL};	//"text_a.txt", "text_b.txt"
-	char *redirections_outfile[] = {"", NULL};
-	char *redirections_heredoc[] = {NULL};
+	char *test_tab_cmd[] = {"cat -e", "echo bla", "cat -e", NULL};
+	char *redirections_infile[] = {"text_c.txt", "", "", NULL};	//"text_a.txt", "text_b.txt"
+	char *redirections_outfile[] = {"", "", "out" ,NULL};
+	char *redirections_heredoc[] = {"", "lo", "", NULL}; //	mettre NULL si rien et non "" /!|
 	/*---------------------------------------------------*/
 
-	info_exec->number_of_pipes = 0;
+	info_exec->number_of_pipes = 2;
 	info_exec->tab_cmd = test_tab_cmd;
 
 	info_exec->env_cpy = envp;

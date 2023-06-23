@@ -5,7 +5,7 @@ void handle_single_cmd(t_pipe *d_pip, t_exec *d_exe, t_shell *d_shell, char *cmd
     int fork_pid;
 	int status;
 
-    fprintf(stderr, "single cmd\n");
+    //fprintf(stderr, "single cmd\n");
     fork_pid = fork();
     if (fork_pid == -1)
     {
@@ -77,13 +77,13 @@ void		child_process_0(t_pipe *d_pip, t_exec *d_exe, t_shell *d_shell, char *cmd)
 		fprintf(stderr, "fork errot\n"); //perror_msg();
 	if (fork_pid == 0)
 	{
-		fprintf(stderr, ">>child proces_0: %s\n", cmd);
+		//fprintf(stderr, ">>child proces_0: %s\n", cmd);
 		close_pipes(d_pip, 1);
 		d_exe->path = get_path(d_exe->env_cpy);
 		d_exe->access_path = ft_split_exec(d_exe->path, ':', 1);
 		d_exe->cmd_n_arg = ft_split_exec(cmd, ' ', 0);
 		d_exe->cmd_path = get_cmd_path(d_exe->cmd_n_arg[0], d_exe, &d_shell->trash_lst);
-		fprintf(stderr, "handle_redi_child_0\n");
+		//fprintf(stderr, "handle_redi_child_0\n");
 		handle_redirections(d_exe, d_pip);
 		if (d_exe->cmd_number == 0)
 			first_cmd(d_pip, d_exe->cmd_path, d_exe);
@@ -101,7 +101,7 @@ void		child_process_0(t_pipe *d_pip, t_exec *d_exe, t_shell *d_shell, char *cmd)
 void	child_process_1(t_pipe *d, t_exec *d_exe, t_shell *d_shell, char *cmd)
 {
 	int		fork_pid;
-	fprintf(stderr, ">>child proces_1: %s\n", cmd);
+	//fprintf(stderr, ">>child proces_1: %s\n", cmd);
 	fork_pid = fork();
 
 	if (fork_pid == -1)
@@ -113,7 +113,7 @@ void	child_process_1(t_pipe *d, t_exec *d_exe, t_shell *d_shell, char *cmd)
 		d_exe->access_path = ft_split_exec(d_exe->path, ':', 1);
 		d_exe->cmd_n_arg = ft_split_exec(cmd, ' ', 0);
 		d_exe->cmd_path = get_cmd_path(d_exe->cmd_n_arg[0], d_exe, &d_shell->trash_lst);
-		fprintf(stderr, "handle_redi_child_1\n");
+		//fprintf(stderr, "handle_redi_child_1\n");
 		handle_redirections(d_exe, d);
 		if (d_exe->cmd_number == d_exe->number_of_pipes)
 		{
@@ -134,7 +134,7 @@ void	child_process_1(t_pipe *d, t_exec *d_exe, t_shell *d_shell, char *cmd)
 
 void	first_cmd(t_pipe *d, char *cmd_path, t_exec *d_exe)
 {
-	fprintf(stderr, "first_cmd\n");
+	//fprintf(stderr, "first_cmd\n");
 	(void)cmd_path;
 	(void)d_exe;
 	d->fd_in = open(d->infile, O_RDONLY);
@@ -162,11 +162,9 @@ void	first_cmd(t_pipe *d, char *cmd_path, t_exec *d_exe)
 
 void	last_cmd(t_pipe *d, char *cmd_path, int process, t_exec *d_exe)
 {
-	fprintf(stderr, "last_cmd\n");
+	//fprintf(stderr, "last_cmd\n");
 	(void)cmd_path;
 	(void)d_exe;
-	//if (d_exe->heredoc[0])
-	//	d->fd_in = open(".heredoc.txt", O_RDONLY);	//ADDED HANDLE HEREDOC	
 	d->fd_in = open(d->infile, O_RDONLY);
 	if (d->infile)
 	{
@@ -186,8 +184,6 @@ void	last_cmd(t_pipe *d, char *cmd_path, int process, t_exec *d_exe)
 				fprintf(stderr, "dup error_last_cmd_0\n");
 		}
 	}
-	//if (dup2(d->fd_in, STDIN_FILENO) == -1)
-	//		fprintf(stderr, "dup in error_last_cmd\n"); //ADDED HANDLE HEREDOC
 	d->fd_out = open (d->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (d->fd_out < 0)
 	{
@@ -212,7 +208,7 @@ void	last_cmd(t_pipe *d, char *cmd_path, int process, t_exec *d_exe)
 
 void	middle_cmd(t_pipe *d, char *cmd_path, int process)
 {
-	fprintf(stderr, "middle_cmd\n");
+	//fprintf(stderr, "middle_cmd\n");
 	(void)cmd_path;
 	d->fd_in = open(d->infile, O_RDONLY);
 	if (d->infile)
