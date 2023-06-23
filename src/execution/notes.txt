@@ -1,0 +1,34 @@
+EXECUTION
+
+Redirections:
+-> Faire un tableau de tout les infile < present dans l'input.
+tab_infile[0] = "text_a.txt"
+tab_infile[1] = "text_b.txt"
+etc...
+
+-> Faire un tableau de tout les outfile > present dans l'input.
+tab_outfile[0] = "out_a"
+tab_outfile[1] = "out_b"
+tab_outfile[2] = "out_c"
+etc...
+
+Le dernier element du tableau sera pris en compte pour l'infile et l'outfile.
+
+Commandes:
+-> Faire un tableau 2d de toutes les commandes presentes dans l'input:
+tab_cmd[0] = "echo salut"
+tab_cmd[1] = "grep salut"
+tab_cmd[2] = "cat -e"
+tab_cmd[3] = "cat -e"
+etc...
+
+-> shell_exec recoit le tab_cmd, le tab_infile et le tab_outfile
+
+->ouvrir et fermer tout les infiles, outfiles non utilises.
+
+segfault avec builtins quand 1 pipe. sinon rentre dans process child si pipe 0.
+
+
+
+
+PASSE 2 FOIS DANS FIRST ARG AVEC 3 COMMANDES ET IGNORE MIDDLE
